@@ -44,3 +44,47 @@ canvas {
 	width: 300px;
 	filter: invert(.3);
 }
+.controlField {
+	display: none;
+	grid-template-areas: 
+	". . key_pause"
+	". key_up ."
+	"key_left key_down key_right";
+	margin: 25px;
+}
+.key_up {
+	grid-area: key_up;
+}
+.key_left {
+	grid-area: key_left;
+}
+.key_down {
+	grid-area: key_down;
+}
+.key_right {
+	grid-area: key_right;
+}
+.key_pause {
+	grid-area: key_pause;
+}
+.controlField button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: transparent;
+	margin: 15px;
+	padding: 10px;
+	border-radius: 35px;
+	border: 5px solid #333;
+	width: max-content;
+}
+.controlField img {
+	height: 125px;
+	pointer-events: none;
+	user-select: none;
+	filter: invert(.3);
+}
+.key_pause img {
+	width: 75px;
+	height: 75px;
+}

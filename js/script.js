@@ -36,6 +36,12 @@ let gameOver = function(){
 			location.reload();
 		}
 	});
+	$(".controlField").mousedown(function(event) {
+		if(event.target.closest('button')) {
+			clearTimeout(timeoutID);
+			location.reload();
+		}
+	});
 }
 let pause = function(){
 	ctx.font = "60px Courier";
@@ -193,5 +199,14 @@ $("body").keydown(function (event) {
 	let newDirection = directions[event.keyCode];
 	if (newDirection !== undefined){
 		snake.setDirection(newDirection);
+	}
+});
+if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+	$(".controlField").css({display: "grid"});
+	$(".description").css({display: "none"});
+}
+$(".controlField").mousedown(function(event) {
+	if(event.target.closest('button')) {
+		snake.setDirection(`${event.target.id}`);
 	}
 });
