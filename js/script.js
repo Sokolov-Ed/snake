@@ -1,13 +1,37 @@
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
-let width = canvas.width;
-let height = canvas.height;
-let blockSize = 10;
-let widthInBlocks = width / blockSize;
-let heightInBlocks = height / blockSize;
+let width, height, blockSize, widthInBlocks, heightInBlocks, fontSizeScore, mainFontSize;
 let score = 0;
 let animationTime = 100;
 let timeoutID;
+
+if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+	$(".controlField").css({display: "grid"});
+	$(".description").css({display: "none"});
+	$("canvas").attr({
+		width: "800",
+		height: "800"
+	});
+	$(".gameName img").css({height: "175px"});
+	$(".gameName span").css({fontSize: "125px"});
+	fontSizeScore = 50;
+	mainFontSize = 115;
+	blockSize = 25;
+	width = canvas.width;
+	height = canvas.height;
+	widthInBlocks = width / blockSize;
+	heightInBlocks = height / blockSize;
+}
+else {
+	fontSizeScore = 10;
+	mainFontSize = 60;
+	blockSize = 10;
+	width = 500;
+	height = 500;
+	widthInBlocks = width / blockSize;
+	heightInBlocks = height / blockSize;
+}
+
 let drawBorder = function(){
 	ctx.fillStyle = "#77E588";
 	ctx.fillRect(0, 0, width, blockSize);
@@ -16,7 +40,7 @@ let drawBorder = function(){
 	ctx.fillRect(width - blockSize, 0, blockSize, height);
 }
 let drawScore = function(){
-	ctx.font = "20px Courier";
+	ctx.font = `${fontSizeScore}px Courier`;
 	ctx.fillStyle = "black";
 	ctx.textAlign = "left";
 	ctx.textBaseline = "top";
@@ -24,7 +48,7 @@ let drawScore = function(){
 }
 let gameOver = function(){
 	clearTimeout(timeoutID);
-	ctx.font = "60px Courier";
+	ctx.font = `${mainFontSize}px Courier`;
 	ctx.fillStyle = "black";
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
@@ -44,7 +68,7 @@ let gameOver = function(){
 	});
 }
 let pause = function(){
-	ctx.font = "60px Courier";
+	ctx.font = `${mainFontSize}px Courier`;
 	ctx.fillStyle = "black";
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
@@ -156,11 +180,11 @@ Snake.prototype.setDirection = function(newDirection){
 	}
 	this.nextDirection = newDirection;
 }
-var Apple = function(){
+let Apple = function(){
 	this.position = new Block(10, 10);
 }
 Apple.prototype.draw = function(){
-	this.position.drawCircle("limegreen");
+	this.position.drawCircle("red");
 }
 Apple.prototype.move = function(occupiedBlocks){
 	let randomCol = Math.floor(Math.random() * (widthInBlocks - 2)) + 1;
@@ -201,10 +225,6 @@ $("body").keydown(function (event) {
 		snake.setDirection(newDirection);
 	}
 });
-if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-	$(".controlField").css({display: "grid"});
-	$(".description").css({display: "none"});
-}
 $(".controlField").mousedown(function(event) {
 	if(event.target.closest('button')) {
 		snake.setDirection(`${event.target.id}`);

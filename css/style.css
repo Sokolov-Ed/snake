@@ -47,8 +47,7 @@ canvas {
 .controlField {
 	display: none;
 	grid-template-areas: 
-	". . key_pause"
-	". key_up ."
+	"key_pause key_up ."
 	"key_left key_down key_right";
 	margin: 25px;
 }
@@ -77,14 +76,14 @@ canvas {
 	border-radius: 35px;
 	border: 5px solid #333;
 	width: max-content;
+	height: max-content;
 }
 .controlField img {
-	height: 125px;
+	height: 175px;
 	pointer-events: none;
 	user-select: none;
 	filter: invert(.3);
 }
 .key_pause img {
-	width: 75px;
-	height: 75px;
+	height: 125px;
 }
