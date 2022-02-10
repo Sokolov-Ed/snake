@@ -23,7 +23,7 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone
 	heightInBlocks = height / blockSize;
 }
 else {
-	fontSizeScore = 10;
+	fontSizeScore = 25;
 	mainFontSize = 60;
 	blockSize = 10;
 	width = 500;
@@ -218,14 +218,13 @@ let directions = {
 	40: "down",
 	32: "space"
 };
-
 $("body").keydown(function (event) {
 	let newDirection = directions[event.keyCode];
 	if (newDirection !== undefined){
 		snake.setDirection(newDirection);
 	}
 });
-$(".controlField").mousedown(function(event) {
+$(".controlField").on("click", function(event) {
 	if(event.target.closest('button')) {
 		snake.setDirection(`${event.target.id}`);
 	}
